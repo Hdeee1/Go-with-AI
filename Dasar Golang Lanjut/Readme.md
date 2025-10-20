@@ -21,4 +21,9 @@
 - Struct adalah kumpulan dari field (properti) data
 - Ini adalah fondasi untuk membuat model data yang terstruktur
 - Penggunaan di proyek nyata, mendefinisikan model data apapun. Contoh User, Product, Order, Config, dll. Ini adalah salah satu konsep yang paling sering digunakan.
- 
+
+5. Interface "./interface.go"
+- Interface mendefinisikan perilaku (kumpulan kode), bukan data.
+- Sebuah struct secara otomatis memenuhi Interface jika ia memiliki sebuah method yang disyaratkan oleh Interface tersebut (ini disebut implicit implementation)
+- Membuat kode sangat modular, fleksibel, dan mudah di test.
+- Penggunaan di proyek nyata, membuat fungsi yang bisa bekerja dengan berbagai jenis database (MySQL, Postgre) selama keduanya memenuhi interface Database yang punya method Connect(), Query(), dll
