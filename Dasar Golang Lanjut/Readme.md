@@ -17,3 +17,8 @@
 - Sangat berguna untuk mengubah nilai variable asli disebuah fungsi
 - Penggunaan di peoyek nyata, saat mengupdate data di sebuah fungsi (misal: funsdi UpdateUser), kamu mengirim pointer ke struct User agar perubahannya lansung terjadi pada data asli bukan pada salinannya
 
+4. Struct "./struct.go"
+- Struct adalah kumpulan dari field (properti) data
+- Ini adalah fondasi untuk membuat model data yang terstruktur
+- Penggunaan di proyek nyata, mendefinisikan model data apapun. Contoh User, Product, Order, Config, dll. Ini adalah salah satu konsep yang paling sering digunakan.
+ 
