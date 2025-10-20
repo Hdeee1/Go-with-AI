@@ -27,3 +27,9 @@
 - Sebuah struct secara otomatis memenuhi Interface jika ia memiliki sebuah method yang disyaratkan oleh Interface tersebut (ini disebut implicit implementation)
 - Membuat kode sangat modular, fleksibel, dan mudah di test.
 - Penggunaan di proyek nyata, membuat fungsi yang bisa bekerja dengan berbagai jenis database (MySQL, Postgre) selama keduanya memenuhi interface Database yang punya method Connect(), Query(), dll
+
+6. Error Handling "./error-handling.go"
+- Error di Go adalah sebuah nilai, bukan sebuah sesuatu yang dilempar.
+- Konvensi utamanya adalah "if err != nil". Ini adalah pola yang akan ditulis ribuan kali
+- Memaksa programmer untuk secara sadar menangani kemungkinan kegagalan, membuat kode lebih tangguh.
+- Penggunaan di proyek nyata, setiap operasi yang bisa gagal (membaca file, koneksi ke database, panggilan HTTP, konversi tipe data) akan selalu menggunakan pola ini. 
