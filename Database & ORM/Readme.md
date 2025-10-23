@@ -22,3 +22,10 @@
         - Read (one): db.First(&task, taskID)
         - Update: db.Model(&task).Updates(updateData)
         - Delete: db.Delete(&task, taskID)
+
+4. Transaksi "./transaksi.go"
+- Point penting :
+- Menjamin intregritas dan konsisten data
+- Gunakan ini untuk proses bisnis  yang melibatkan beberapa langkah penulisan ke database
+- Contoh: Registrasi user, pembuatan profil, pengiriman email selamat datang. Jika gagal salah satu, batalkan semua
+- Tujuan CRUD, Transaksi membuat operasi Create dan Update yang kompleks menjadi lebih aman dan andal. Saat kamu membuat satu user, mungkin kamu juga perlu membuat profile dan defaultSetting untuknya. Bungkus ketiga operasi Create tersebut dalam satu transaksi.
