@@ -20,3 +20,10 @@
     - Ini adalah implementasi prinsip DRY (Don't Repeat Yourself). Kamu tidak perlu menulis logika verifikasi token di setiap handler. Cukup terapkan satu middleware ini ke grup route yang ingin kamu lindungi.
     - Memisahkan logika keamanan dari logika bisnis. Handler-mu (misal: getProfile) bisa fokus pada tugasnya mengambil data profil, karena ia bisa berasumsi bahwa request yang sampai padanya sudah pasti terautentikasi.
     - Tujuan Proteksi Route: Kamu akan membuat sebuah AuthMiddleware dan menerapkannya pada grup route seperti /api/v1/tasks atau /api/v1/profile, sementara route seperti /login dan /register dibiarkan publik (tidak memakai middleware ini).
+
+3. Session Handling
+- Poin Penting:
+    - Stateful: Server harus menyimpan data sesi untuk setiap pengguna yang aktif. Ini bisa menjadi tantangan saat scaling karena setiap server harus punya akses ke penyimpanan sesi yang sama.
+    - Klien Hanya Menyimpan ID: Klien (browser) hanya menyimpan ID sesi yang tidak berarti apa-apa (biasanya dalam bentuk cookie), bukan data pengguna. Ini sedikit lebih aman jika cookie dicuri.
+    - Invalidasi Sesi: Karena sesi disimpan di server, kamu punya kontrol penuh. Kamu bisa secara paksa me-logout pengguna kapan saja dengan menghapus data sesinya dari server. Hal ini lebih sulit dilakukan dengan JWT.
+    - Perbandingan: JWT lebih modern dan cocok untuk API stateless dan arsitektur microservices. Session lebih tradisional, cocok untuk aplikasi web monolitik di mana kamu butuh kontrol penuh untuk me-logout pengguna secara paksa dari sisi server.
