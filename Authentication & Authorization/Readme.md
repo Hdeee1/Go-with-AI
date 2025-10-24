@@ -15,3 +15,8 @@
     5) Untuk request selanjutnya (misal: ke "/profile"), User menyertakan JWT ini di header Authorization (contoh: Authorization: Bearer <token_panjang_jwt>)
     6) Server menerima request, memverifikasi tanda tangan JWT, dan jika valid, mengizinkan akses ke "/profile"
 
+2. Middleware "./middleware.go"
+- Poin Penting:
+    - Ini adalah implementasi prinsip DRY (Don't Repeat Yourself). Kamu tidak perlu menulis logika verifikasi token di setiap handler. Cukup terapkan satu middleware ini ke grup route yang ingin kamu lindungi.
+    - Memisahkan logika keamanan dari logika bisnis. Handler-mu (misal: getProfile) bisa fokus pada tugasnya mengambil data profil, karena ia bisa berasumsi bahwa request yang sampai padanya sudah pasti terautentikasi.
+    - Tujuan Proteksi Route: Kamu akan membuat sebuah AuthMiddleware dan menerapkannya pada grup route seperti /api/v1/tasks atau /api/v1/profile, sementara route seperti /login dan /register dibiarkan publik (tidak memakai middleware ini).
