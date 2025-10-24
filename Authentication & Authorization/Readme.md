@@ -27,3 +27,23 @@
     - Klien Hanya Menyimpan ID: Klien (browser) hanya menyimpan ID sesi yang tidak berarti apa-apa (biasanya dalam bentuk cookie), bukan data pengguna. Ini sedikit lebih aman jika cookie dicuri.
     - Invalidasi Sesi: Karena sesi disimpan di server, kamu punya kontrol penuh. Kamu bisa secara paksa me-logout pengguna kapan saja dengan menghapus data sesinya dari server. Hal ini lebih sulit dilakukan dengan JWT.
     - Perbandingan: JWT lebih modern dan cocok untuk API stateless dan arsitektur microservices. Session lebih tradisional, cocok untuk aplikasi web monolitik di mana kamu butuh kontrol penuh untuk me-logout pengguna secara paksa dari sisi server.
+
+Kesimpulan untuk Membangun Sistem Login
+1.Buat endpoint /register:
+- Terima name, email, password dari klien.
+- Hash password-nya! Jangan pernah simpan password sebagai teks biasa. Gunakan library seperti bcrypt.
+- Simpan user baru ke database.
+
+2. Buat endpoint /login:
+- Terima email dan password.
+- Cari user di DB berdasarkan email.
+- Bandingkan password yang masuk dengan hash yang ada di DB menggunakan fungsi bcrypt.CompareHashAndPassword.
+- Jika cocok, generate JWT yang berisi user_id dan exp.
+- Kirim JWT ini kembali ke klien.
+
+3. Buat AuthMiddleware:
+- Implementasikan logika untuk memeriksa dan memvalidasi JWT dari Authorization header.
+- Ekstrak user_id dari token dan simpan di context Gin (c.Set("userID", claims.UserID)) agar bisa diakses oleh handler.
+
+4. Terapkan Middleware:
+- Grup semua route yang butuh login (/profile, /tasks, dll.) dan terapkan AuthMiddleware pada grup tersebut.
